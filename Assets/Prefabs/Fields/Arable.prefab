@@ -60,6 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantPrefab: {fileID: 3289176629815835895, guid: 1374e43f3c195a04a9e694567bb202f4,
     type: 3}
+  deadPlantPrefab: {fileID: 5233960958675500864, guid: 4cdb0c314d5cc3d49828b880f3d08697,
+    type: 3}
 --- !u!1 &855705421025724232
 GameObject:
   m_ObjectHideFlags: 0

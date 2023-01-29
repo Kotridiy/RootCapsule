@@ -8,6 +8,7 @@ namespace RootCapsule.Model.Fields
     public class Arable : MonoBehaviour
     {
         [SerializeField] private Plant plantPrefab;
+        [SerializeField] private DeadPlant deadPlantPrefab;
 
         public Vector2Int IndexPosition { get; private set; }
 
@@ -34,6 +35,7 @@ namespace RootCapsule.Model.Fields
             var newPlant = Instantiate(plantPrefab, transform);
             newPlant.Initialize(this, seed.PlantType, seed.SeedStat, Fertilizer);
             AliveOnArable = newPlant;
+            newPlant.Destruction += OnDestruction;
         }
 
         Field GetField()
@@ -79,7 +81,19 @@ namespace RootCapsule.Model.Fields
 
         void OnDestruction()
         {
-            AliveOnArable = null;
+            Plant plant = AliveOnArable as Plant;
+            if (plant != null)
+            {
+                var deadPlant = Instantiate(deadPlantPrefab, transform);
+                plant.PutToDeathParts(deadPlant);
+                plant.Destruction -= OnDestruction;
+                deadPlant.Destruction += OnDestruction;
+                AliveOnArable = deadPlant;
+            }
+            else
+            {
+                AliveOnArable = null;
+            }
         }
 
         void OnTick()

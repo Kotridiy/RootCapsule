@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityObject = UnityEngine.Object;
 using UnityRandom = UnityEngine.Random;
 
 namespace RootCapsule.Model.Fields
@@ -31,8 +30,7 @@ namespace RootCapsule.Model.Fields
         Fertilizer fertilizer;
         bool initialized = false;
 
-        // TEST CODE
-        UnityObject[] models;
+        Mesh[] models;
 
         public event Action Destruction;
 
@@ -58,6 +56,15 @@ namespace RootCapsule.Model.Fields
             initialized = true;
         }
 
+        public void PutToDeathParts(DeadPlant deadPlant)
+        {
+            foreach (var plantPart in plantParts)
+            {
+                plantPart.Die(models);
+                plantPart.transform.parent = deadPlant.transform;
+            }
+        }
+
         void OnEnable()
         {
             if (fertilizer != null) fertilizer.FertilizerOver += OnFertilizerOver;
@@ -70,7 +77,7 @@ namespace RootCapsule.Model.Fields
             WorldTime.GetWorldTime().Tick -= OnTick;
         }
 
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             if (!IsRandomCenter) return;
 
@@ -91,6 +98,14 @@ namespace RootCapsule.Model.Fields
             }
         }
 
+        void Start()
+        {
+            if (!initialized && Application.isPlaying && !testObject)
+            {
+                throw new Exception(typeof(Plant).ToString() + " not initialized!");
+            }
+        }
+
         void CreatePlantParts()
         {
             if (arable == null) throw new Exception(typeof(Plant) + " must be part of " + typeof(Arable));
@@ -105,7 +120,7 @@ namespace RootCapsule.Model.Fields
                 {
                     Vector3 center = GetPlantPartCenter(i, j, arableBounds);
                     PlantPart plantPart = Instantiate(partPrefab, GetPlantPartRandomize(center, size), Quaternion.identity, transform);
-                    plantPart.GetComponent<MeshFilter>().mesh = (models as Mesh[]).Single(m => m.name == "tree_01_start");
+                    plantPart.ChangeState(plantState.LifeStage, models);
                     plantParts.Add(plantPart);
                 }
             }
@@ -174,42 +189,31 @@ namespace RootCapsule.Model.Fields
                 if (stageIndex <= LIFE_STAGE_COUNT && plantState.LifeStage != stage)
                 {
                     plantState.LifeStage = stage;
-                    ChangeState(stageIndex);
+                    ChangeState();
                 }
             }
         }
 
-        void ChangeState(int stage)
+        void ChangeState()
         {
             foreach (var plantPart in plantParts)
             {
-                plantPart.GetComponent<MeshFilter>().mesh = (models as Mesh[]).Single(m => m.name == "tree_01_mid");
+                plantPart.ChangeState(plantState.LifeStage, models);
             }
-            Debug.Log("ChangeState: " + (LifeStage)stage);
         }
 
         void GrowingUp()
         {
             foreach (var plantPart in plantParts)
             {
-                plantPart.GetComponent<MeshFilter>().mesh = (models as Mesh[]).Single(m => m.name == "tree_01_end");
+                plantPart.ChangeState(plantState.LifeStage, models);
             }
-            Debug.Log("GrowingUp");
         }
 
         void Die()
         {
-            Debug.Log($"Plant {arable.IndexPosition.x}, {arable.IndexPosition.x} die!");
             Destruction?.Invoke();
             Destroy(gameObject);
-        }
-
-        void Start()
-        {
-            if (!initialized && Application.isPlaying && !testObject)
-            {
-                throw new Exception(typeof(Plant).ToString() + " not initialized!");
-            }
         }
     }
 }

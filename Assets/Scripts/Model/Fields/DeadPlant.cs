@@ -1,21 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RootCapsule.Model.Fields
 {
     // developing: store model of dead plant, destroy
-    public class DeadPlant : MonoBehaviour
+    public class DeadPlant : MonoBehaviour, IAlive
     {
+        public event Action Destruction;
 
-        // Use this for initialization
-        void Start()
+        public void Weed()
         {
-
+            Destroy();
         }
 
-        // Update is called once per frame
-        void Update()
+        void Destroy()
         {
-
+            Destruction?.Invoke();
+            Destroy(gameObject);
         }
     }
 }
