@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RootCapsule.Model.Fields
+﻿namespace RootCapsule.Model.Fields
 {
-    class PlantState
+    public struct PlantState
     {
+        public float LifePoints;
+        public LifeStage LifeStage;
+    }
 
+    public enum LifeStage
+    {
+        New,
+        Child,
+        Teen,
+        Adult,
+        Refill
     }
 }

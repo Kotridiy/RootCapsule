@@ -6,8 +6,9 @@ namespace RootCapsule.Core
     // Developing: loading state;
     public class WorldTime : MonoBehaviour
     {
-        private const float TICK_DELTA = 9f;
-        private const int DAY_LENGTH = 30;
+        [SerializeField] private float tickLength = 9f;
+        [SerializeField] private int dayLenght = 30;
+
         private TimeSpan timePassed;
         private int ticksPassed;
         private bool timeGo;
@@ -21,7 +22,7 @@ namespace RootCapsule.Core
             return worldTime;
         }
 
-        public bool IsDayOver { get => ticksPassed == DAY_LENGTH; }
+        public bool IsDayOver { get => ticksPassed == dayLenght; }
 
         public bool TimeGo
         { 
@@ -37,19 +38,19 @@ namespace RootCapsule.Core
             get
             {
                 if (IsDayOver) return 0;
-                return (DAY_LENGTH - ticksPassed) * TICK_DELTA - (float)timePassed.TotalSeconds;
+                return (dayLenght - ticksPassed) * tickLength - (float)timePassed.TotalSeconds;
             }
         }
 
-        public float DayLeftoverTicks => DAY_LENGTH - ticksPassed - 1;
+        public float DayLeftoverTicks => dayLenght - ticksPassed - 1;
 
-        public float DayLeftoverPersentage => DAY_LENGTH * TICK_DELTA / DayLeftoverSeconds;
+        public float DayLeftoverPersentage => dayLenght * tickLength / DayLeftoverSeconds;
 
         public event Action Tick;
         public event Action DayOver;
 
 
-        private void Awake()
+        void Awake()
         {
             // TODO loading state
             initialized = false;
@@ -62,11 +63,11 @@ namespace RootCapsule.Core
             if (TimeGo)
             {
                 timePassed += TimeSpan.FromSeconds(Time.deltaTime);
-                if (timePassed.TotalSeconds > TICK_DELTA)
+                if (timePassed.TotalSeconds > tickLength)
                 {
                     Tick?.Invoke();
                     ticksPassed++;
-                    timePassed -= TimeSpan.FromSeconds(TICK_DELTA);
+                    timePassed -= TimeSpan.FromSeconds(tickLength);
 
                     if (IsDayOver)
                     {
@@ -76,7 +77,7 @@ namespace RootCapsule.Core
                 }
             }
 
-            if (ticksPassed > DAY_LENGTH) 
+            if (ticksPassed > dayLenght) 
                 throw new Exception("Time more than day length!");
         }
 
@@ -123,8 +124,8 @@ namespace RootCapsule.Core
             if (seconds <= DayLeftoverSeconds)
             {
                 timePassed += TimeSpan.FromSeconds(seconds);
-                int ticks = (int)Math.Floor(timePassed.TotalSeconds / TICK_DELTA);
-                timePassed -= TimeSpan.FromSeconds(ticks * TICK_DELTA);
+                int ticks = (int)Math.Floor(timePassed.TotalSeconds / tickLength);
+                timePassed -= TimeSpan.FromSeconds(ticks * tickLength);
                 SkipTime(ticks);
             }
             else
@@ -139,7 +140,7 @@ namespace RootCapsule.Core
             Tick?.Invoke();
             DayOver?.Invoke();
             TimeGo = false;
-            ticksPassed = DAY_LENGTH;
+            ticksPassed = dayLenght;
         }
     }
 }

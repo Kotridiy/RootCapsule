@@ -50,7 +50,7 @@ namespace RootCapsule.Core
             public int SeedsMax { get; set; }
             public int HarvestPrice { get; set; }
             public int SeedPrice { get; set; }
-            public int Mutability { get; }
+            public int Mutability { get; set; }
             public int Influence { get; set; }
             public int Resistance { get; set; }
             public int Capacity { get; set; }
@@ -62,7 +62,7 @@ namespace RootCapsule.Core
             }
         }
 
-        private static int ValidateMin(int value, int min, string paramName)
+        static int ValidateMin(int value, int min, string paramName)
         {
             return value >= min ? value : throw new ArgumentException(paramName);
         }

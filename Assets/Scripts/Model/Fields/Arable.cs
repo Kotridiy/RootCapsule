@@ -5,12 +5,14 @@ using UnityEngine;
 namespace RootCapsule.Model.Fields
 {
     // developing: row arable, weed attack, crossing
-    public class Arable : MonoBehaviour, ITimeDependent
+    public class Arable : MonoBehaviour
     {
+        [SerializeField] private Plant plantPrefab;
+
         public Vector2Int IndexPosition { get; private set; }
 
         public Fertilizer Fertilizer { get; private set; }
-        public IAlive AliveOnArable { get; set; }
+        public IAlive AliveOnArable { get; private set; }
 
         Field field;
 
@@ -25,6 +27,15 @@ namespace RootCapsule.Model.Fields
             initialized = true;
         }
 
+        public void PlantSeed(Seed seed)
+        {
+            if (AliveOnArable != null) throw new InvalidOperationException($"{typeof(Arable)} can't store more that one plant!");
+
+            var newPlant = Instantiate(plantPrefab, transform);
+            newPlant.Initialize(this, seed.PlantType, seed.SeedStat, Fertilizer);
+            AliveOnArable = newPlant;
+        }
+
         Field GetField()
         {
             var field = gameObject.GetComponentInParent<Field>();
@@ -37,7 +48,7 @@ namespace RootCapsule.Model.Fields
             return field;
         }
 
-        private void Start()
+        void Start()
         {
             if (!initialized && Application.isPlaying)
             {
@@ -49,14 +60,16 @@ namespace RootCapsule.Model.Fields
             Fertilizer.FertilizerOver += OnFertilizerOver;
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             if (Fertilizer != null) Fertilizer.FertilizerOver += OnFertilizerOver;
+            if (AliveOnArable != null) AliveOnArable.Destruction += OnDestruction;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             if (Fertilizer != null) Fertilizer.FertilizerOver -= OnFertilizerOver;
+            if (AliveOnArable != null) AliveOnArable.Destruction += OnDestruction;
         }
 
         void OnFertilizerOver()
@@ -64,7 +77,12 @@ namespace RootCapsule.Model.Fields
             Fertilizer = null;
         }
 
-        void ITimeDependent.OnTick()
+        void OnDestruction()
+        {
+            AliveOnArable = null;
+        }
+
+        void OnTick()
         {
             // TODO
         }

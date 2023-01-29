@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7a8fa798023504090bd939ca13a746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantPrefab: {fileID: 3289176629815835895, guid: 1374e43f3c195a04a9e694567bb202f4,
+    type: 3}
 --- !u!1 &855705421025724232
 GameObject:
   m_ObjectHideFlags: 0

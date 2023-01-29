@@ -63,7 +63,6 @@
     <Compile Include="Assets\Scripts\Control\SceneControl\FieldsSceneController.cs" />
     <Compile Include="Assets\Scripts\Control\SceneControl\SceneController.cs" />
     <Compile Include="Assets\Scripts\Core\Types\GameTags.cs" />
-    <Compile Include="Assets\Scripts\Core\Types\ITimeDependent.cs" />
     <Compile Include="Assets\Scripts\Core\Types\PlantType.cs" />
     <Compile Include="Assets\Scripts\Core\WorldTime.cs" />
     <Compile Include="Assets\Scripts\Model\Fields\Arable.cs" />

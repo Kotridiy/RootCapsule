@@ -8,12 +8,12 @@ namespace RootCapsule.Control.SceneControl
     {
         PlayerInput input;
 
-        private void Awake()
+        void Awake()
         {
             input = gameObject.GetComponent<PlayerInput>();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             input.PrimaryPressed += OnPrimaryPressed;
             input.SecondaryPressed += OnSecondaryPressed;
@@ -24,7 +24,7 @@ namespace RootCapsule.Control.SceneControl
             input.DraggingEnd += OnDraggingEnd;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             input.PrimaryPressed -= OnPrimaryPressed;
             input.SecondaryPressed -= OnSecondaryPressed;

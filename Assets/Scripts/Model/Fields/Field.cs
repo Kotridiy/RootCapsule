@@ -11,7 +11,7 @@ namespace RootCapsule.Model.Fields
 
         Vector3 size;
 
-        private void Awake()
+        void Awake()
         {
             size = arable.GetComponentInChildren<Renderer>().bounds.size;
             for (int i = 0; i < matrixSize.x; i++)
@@ -24,7 +24,7 @@ namespace RootCapsule.Model.Fields
             }
         }
 
-        private void OnDrawGizmos()
+        void OnDrawGizmos()
         {
             if (size == Vector3.zero)
                 size = arable.GetComponentInChildren<Renderer>().bounds.size;
@@ -38,7 +38,7 @@ namespace RootCapsule.Model.Fields
             }
         }
 
-        private Vector3 GetPosition(int i, int j)
+        Vector3 GetPosition(int i, int j)
         {
             return transform.position + new Vector3((size.x + arablePadding.x) * i, 0, (size.z + arablePadding.y) * j);
         }

@@ -4,14 +4,14 @@ namespace RootCapsule.Model.Fields
 {
     public class Fertilizer
     {
-        internal float GrowthModifier { get; }
-        internal float VitalityModifier { get; }
-        internal float ProductivityModifier { get; }
-        internal float ResistModifier { get; }
+        public float GrowthModifier { get; }
+        public float VitalityModifier { get; }
+        public float ProductivityModifier { get; }
+        public float ResistModifier { get; }
 
         int uses;
 
-        internal event Action FertilizerOver;
+        public event Action FertilizerOver;
 
         public Fertilizer(int uses, float growthModifier = 1f, float vitalityModifier = 1f, float productivityModifier = 1f, float resistModifier = 1f)
         {
@@ -23,7 +23,7 @@ namespace RootCapsule.Model.Fields
             this.uses = uses;
         }
 
-        internal void Use()
+        public void Use()
         {
             uses--;
 

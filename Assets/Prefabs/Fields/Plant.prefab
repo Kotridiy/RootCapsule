@@ -45,9 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partPrefab: {fileID: -4452427678189488040, guid: 87ddf5b635221e745b8acf18964b44a3,
     type: 3}
-  IsRandomCenter: 1
+  IsRandomCenter: 0
   matrixSize: {x: 3, y: 4}
-  arablePadding: {x: 0.2, y: 0.2}
+  arablePadding: {x: 0.7, y: 0.4}
   outlineMargin: 0.2
   testObject: 0
   modelPath: Assets/Downloaded/Simple Blocky Growing Trees/3.models/trees.fbx
