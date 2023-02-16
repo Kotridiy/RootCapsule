@@ -16,8 +16,8 @@ namespace RootCapsule.Control.Input
             return playerInput;
         }
 
-        public event Action PrimaryPressed;
-        public event Action SecondaryPressed;
+        public event Action<Vector2> PrimaryPressed;
+        public event Action<Vector2> SecondaryPressed;
 
         public event Action<Vector2> DraggingStart;
         public event Action<Vector2> DraggingEnd;
@@ -29,14 +29,14 @@ namespace RootCapsule.Control.Input
 
         #region EventRaising
 
-        protected void RaisePrimaryPressed()
+        protected void RaisePrimaryPressed(Vector2 point)
         {
-            PrimaryPressed?.Invoke();
+            PrimaryPressed?.Invoke(point);
         }
 
-        protected void RaiseSecondaryPressed()
+        protected void RaiseSecondaryPressed(Vector2 point)
         {
-            SecondaryPressed?.Invoke();
+            SecondaryPressed?.Invoke(point);
         }
 
         protected void RaiseDraggingStart(Vector2 startPoint)

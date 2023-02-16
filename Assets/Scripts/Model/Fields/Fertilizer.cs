@@ -1,8 +1,10 @@
-﻿using System;
+﻿using RootCapsule.Core.Types;
+using RootCapsule.ModelData.Fields;
+using System;
 
 namespace RootCapsule.Model.Fields
 {
-    public class Fertilizer
+    public class Fertilizer: ISerializableObject<FertilizerData>
     {
         public float GrowthModifier { get; }
         public float VitalityModifier { get; }
@@ -23,6 +25,11 @@ namespace RootCapsule.Model.Fields
             this.uses = uses;
         }
 
+        public Fertilizer(FertilizerData data)
+        {
+            DeserializeState(data);
+        }
+
         public void Use()
         {
             uses--;
@@ -30,6 +37,16 @@ namespace RootCapsule.Model.Fields
             if (uses < 0) throw new InvalidOperationException(uses + " uses left! Destroy " + typeof(Fertilizer).ToString());
 
             if (uses == 0) FertilizerOver?.Invoke();
+        }
+
+        public FertilizerData SerializeState()
+        {
+            return new FertilizerData();
+        }
+
+        public void DeserializeState(FertilizerData data)
+        {
+            this.uses = 5;
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using RootCapsule.Core;
+using RootCapsule.Core.Types;
+using RootCapsule.ModelData.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,60 +11,79 @@ using UnityRandom = UnityEngine.Random;
 namespace RootCapsule.Model.Fields
 {
     // Developing: grows, dies, destroing, get seeds, harvesting, magic effects, save/load
-    public class Plant : MonoBehaviour, IAlive
+    public class Plant : MonoBehaviour, IAlive, ISerializableObject<PlantData>
     {
         public const int LIFE_STAGE_COUNT = 3;
 
-        [SerializeField] PlantPart partPrefab;
         [SerializeField] bool IsRandomCenter;
         [SerializeField] Vector2Int matrixSize = new Vector2Int(3, 4);
-        [SerializeField] Vector2 arablePadding = new Vector2(0.5f, 1.5f);
+        [SerializeField] Vector2 partsPadding = new Vector2(0.5f, 1.5f);
         [SerializeField] float outlineMargin = 0.2f;
 
         [SerializeField] bool testObject = false;
         [SerializeField] string modelPath;
 
+        PlantPart partPrefab;
         Arable arable;
-        List<PlantPart> plantParts;
-        PlantType plantType;
+        PlantPart[,] plantParts;
+
         SeedStat seedStat;
         PlantState plantState;
         Fertilizer fertilizer;
-        bool initialized = false;
 
-        Mesh[] models;
-
+        public PlantType PlantType { get; private set; }
         public event Action Destruction;
+        public bool Initialized { get; private set; }
 
 
-        public void Initialize(Arable arable, PlantType plantType, SeedStat seedStat, Fertilizer fertilizer, PlantState state = new PlantState())
+        public void Initialize(PlantType plantType, SeedStat seedStat, PlantState plantState = new PlantState(), Vector3[,] partsPositions = null, Quaternion[,] partsRotations = null)
         {
-            if (initialized) return;
+            if (Initialized) return;
 
-            this.arable = arable ?? throw new ArgumentNullException(nameof(arable));
-            this.plantType = plantType;
-            this.seedStat = seedStat;
-            if (fertilizer != null)
+            if (arable.Fertilizer != null)
             {
-                this.fertilizer = fertilizer;
+                fertilizer = arable.Fertilizer;
                 fertilizer.FertilizerOver += OnFertilizerOver;
             }
-            plantState = state;
 
-            // TEST CODE
-            models = AssetDatabase.LoadAllAssetRepresentationsAtPath(modelPath).Where(obj => obj.GetType() == typeof(Mesh)).Select(obj => obj as Mesh).ToArray();
-            CreatePlantParts();
+            this.PlantType = plantType;
+            this.seedStat = seedStat;
+            this.plantState = plantState;
 
-            initialized = true;
+            SetPlantParts(partsPositions, partsRotations);
+
+            gameObject.SetActive(true);
+            Initialized = true;
         }
 
-        public void PutToDeathParts(DeadPlant deadPlant)
+        public void Deinitialize()
         {
-            foreach (var plantPart in plantParts)
+            if (!Initialized) return;
+            gameObject.SetActive(false);
+            Initialized = false;
+        }
+
+        public Vector3[,] GetPlantPartsPositions()
+        {
+            var partsPositions = new Vector3[matrixSize.x, matrixSize.y];
+
+            for (int i = 0; i < matrixSize.x; i++)
             {
-                plantPart.Die(models);
-                plantPart.transform.parent = deadPlant.transform;
+                for (int j = 0; j < matrixSize.y; j++)
+                {
+                    partsPositions[i, j] = plantParts[i, j].transform.position;
+                }
             }
+
+            return partsPositions;
+        }
+
+        void Awake()
+        {
+            partPrefab = PrefabHelper.GetFieldPrefab<PlantPart>();
+            arable = GetArable();
+            CreatePlantParts();
+            if (!Initialized) gameObject.SetActive(false);
         }
 
         void OnEnable()
@@ -80,6 +101,9 @@ namespace RootCapsule.Model.Fields
         void OnDrawGizmosSelected()
         {
             if (!IsRandomCenter) return;
+
+            if (partPrefab == null)
+                partPrefab = PrefabHelper.GetFieldPrefab<PlantPart>();
 
             Gizmos.color = Color.green;
 
@@ -100,10 +124,22 @@ namespace RootCapsule.Model.Fields
 
         void Start()
         {
-            if (!initialized && Application.isPlaying && !testObject)
+            if (!Initialized && Application.isPlaying && !testObject)
             {
                 throw new Exception(typeof(Plant).ToString() + " not initialized!");
             }
+        }
+
+        Arable GetArable()
+        {
+            var arable = gameObject.GetComponentInParent<Arable>();
+
+            if (arable == null)
+            {
+                throw new Exception($"{typeof(Arable)} must be child of {typeof(Field)}!");
+            }
+
+            return arable;
         }
 
         void CreatePlantParts()
@@ -112,7 +148,7 @@ namespace RootCapsule.Model.Fields
 
             Bounds arableBounds = arable.GetComponentInChildren<Renderer>().bounds;
             Vector3 size = IsRandomCenter ? GetPlantPartSize(arableBounds) : Vector3.zero;
-            plantParts = new List<PlantPart>();
+            plantParts = new PlantPart[matrixSize.x, matrixSize.y];
 
             for (int i = 0; i < matrixSize.x; i++)
             {
@@ -120,8 +156,20 @@ namespace RootCapsule.Model.Fields
                 {
                     Vector3 center = GetPlantPartCenter(i, j, arableBounds);
                     PlantPart plantPart = Instantiate(partPrefab, GetPlantPartRandomize(center, size), Quaternion.identity, transform);
-                    plantPart.ChangeState(plantState.LifeStage, models);
-                    plantParts.Add(plantPart);
+                    plantParts[i, j] = plantPart;
+                }
+            }
+        }
+
+        void SetPlantParts(Vector3[,] partsPositions, Quaternion[,] partsRotations)
+        {
+            for (int i = 0; i < matrixSize.x; i++)
+            {
+                for (int j = 0; j < matrixSize.y; j++)
+                {
+                    plantParts[i, j].SetState(PlantType.Id, plantState.LifeStage);
+                    if (partsPositions != null) plantParts[i, j].transform.position = partsPositions[i, j];
+                    if (partsRotations != null) plantParts[i, j].transform.rotation = partsRotations[i, j];
                 }
             }
         }
@@ -137,8 +185,8 @@ namespace RootCapsule.Model.Fields
         Vector3 GetPlantPartSize(Bounds arableBounds)
         {
             Bounds plantBounds = partPrefab.GetComponent<Renderer>().bounds;
-            var x = (arableBounds.size.x - outlineMargin * 2) / matrixSize.x - arablePadding.x;
-            var z = (arableBounds.size.z - outlineMargin * 2) / matrixSize.y - arablePadding.y;
+            var x = (arableBounds.size.x - outlineMargin * 2) / matrixSize.x - partsPadding.x;
+            var z = (arableBounds.size.z - outlineMargin * 2) / matrixSize.y - partsPadding.y;
             var y = plantBounds.size.y;
             return new Vector3(x, y, z);
         }
@@ -170,11 +218,11 @@ namespace RootCapsule.Model.Fields
 
         void CheckLifeProgress()
         {
-            if (plantState.LifePoints > plantType.GrowthTime + plantType.LifeTime)
+            if (plantState.LifePoints > PlantType.GrowthTime + PlantType.LifeTime)
             {
                 Die();
             }
-            else if (plantState.LifePoints >= plantType.GrowthTime)
+            else if (plantState.LifePoints >= PlantType.GrowthTime)
             {
                 if (plantState.LifeStage != LifeStage.Adult && plantState.LifeStage != LifeStage.Refill)
                 {
@@ -184,7 +232,7 @@ namespace RootCapsule.Model.Fields
             }
             else
             {
-                int stageIndex = (int)Math.Floor(LIFE_STAGE_COUNT * plantState.LifePoints / plantType.GrowthTime);
+                int stageIndex = (int)Math.Floor(LIFE_STAGE_COUNT * plantState.LifePoints / PlantType.GrowthTime);
                 LifeStage stage = (LifeStage)stageIndex;
                 if (stageIndex <= LIFE_STAGE_COUNT && plantState.LifeStage != stage)
                 {
@@ -198,7 +246,7 @@ namespace RootCapsule.Model.Fields
         {
             foreach (var plantPart in plantParts)
             {
-                plantPart.ChangeState(plantState.LifeStage, models);
+                plantPart.SetState(PlantType.Id, plantState.LifeStage);
             }
         }
 
@@ -206,14 +254,54 @@ namespace RootCapsule.Model.Fields
         {
             foreach (var plantPart in plantParts)
             {
-                plantPart.ChangeState(plantState.LifeStage, models);
+                plantPart.SetState(PlantType.Id, plantState.LifeStage);
             }
         }
 
         void Die()
         {
             Destruction?.Invoke();
-            Destroy(gameObject);
         }
+
+        #region Serialization
+        public PlantData SerializeState()
+        {
+            VectorData[,] positionsArray = new VectorData[matrixSize.x, matrixSize.y];
+            QuaternionData[,] rotationsArray = new QuaternionData[matrixSize.x, matrixSize.y];
+            for (int i = 0; i < matrixSize.x; i++)
+            {
+                for (int j = 0; j < matrixSize.y; j++)
+                {
+                    positionsArray[i, j] = plantParts[i, j].GetPositionData();
+                    rotationsArray[i, j] = plantParts[i, j].GetRotationData();
+                }
+            }
+
+            return new PlantData
+            {
+                PlantType = PlantType,
+                PlantState = plantState,
+                SeedStat = seedStat,
+                PartsPositions = positionsArray,
+                PartsRotations = rotationsArray
+            };
+        }
+
+        public void DeserializeState(PlantData data)
+        {
+            Vector3[,] positionsArray = new Vector3[matrixSize.x, matrixSize.y];
+            Quaternion[,] rotationsArray = new Quaternion[matrixSize.x, matrixSize.y];
+            for (int i = 0; i < matrixSize.x; i++)
+            {
+                for (int j = 0; j < matrixSize.y; j++)
+                {
+                    positionsArray[i, j] = new Vector3(data.PartsPositions[i, j].X, data.PartsPositions[i, j].Y, data.PartsPositions[i, j].Z);
+                    rotationsArray[i, j] = new Quaternion(data.PartsRotations[i, j].X, data.PartsRotations[i, j].Y, data.PartsRotations[i, j].Z, data.PartsRotations[i, j].W);
+                }
+            }
+
+            Initialize(data.PlantType, data.SeedStat, data.PlantState, positionsArray, rotationsArray);
+        }
+        #endregion
     }
 }

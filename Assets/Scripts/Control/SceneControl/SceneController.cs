@@ -35,18 +35,18 @@ namespace RootCapsule.Control.SceneControl
             input.DraggingEnd -= OnDraggingEnd;
         }
 
-        protected virtual void OnDraggingEnd(Vector2 obj) { }
+        protected virtual void OnDraggingEnd(Vector2 end) { }
 
-        protected virtual void OnDragging(Vector2 obj) { }
+        protected virtual void OnDragging(Vector2 newPoint) { }
 
-        protected virtual void OnDraggingStart(Vector2 obj) { }
+        protected virtual void OnDraggingStart(Vector2 start) { }
 
-        protected virtual void OnPullingOut(float obj) { }
+        protected virtual void OnPullingOut(float amount) { }
 
-        protected virtual void OnPullingIn(float obj) { }
+        protected virtual void OnPullingIn(float amount) { }
 
-        protected virtual void OnSecondaryPressed() { }
+        protected virtual void OnSecondaryPressed(Vector2 point) { }
 
-        protected virtual void OnPrimaryPressed() { }
+        protected virtual void OnPrimaryPressed(Vector2 point) { }
     }
 }

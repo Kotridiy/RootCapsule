@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
-namespace RootCapsule.Core
+namespace RootCapsule.Core.Types
 {
-    // developing: loading from repository 
-    public struct PlantType
+    // developing: loading from repository
+    [Serializable]
+    public class PlantType
     {
 
         public string Id { get; }
@@ -21,23 +23,43 @@ namespace RootCapsule.Core
         public int Capacity { get; }
         public bool Refillable { get; }
 
-        public PlantType(Builder b)
+        #region Constructors
+        public PlantType(Builder b) : this(
+            b.Id,
+            b.GrowthTime,
+            b.LifeTime,
+            b.HarvestMin,
+            b.HarvestMax,
+            b.SeedsMin,
+            b.SeedsMax,
+            b.HarvestPrice,
+            b.SeedPrice,
+            b.Mutability,
+            b.Influence,
+            b.Resistance,
+            b.Capacity,
+            b.Refillable
+        ) { }
+
+        [JsonConstructor]
+        public PlantType(string id, int growthTime, int lifeTime, int harvestMin, int harvestMax, int seedsMin, int seedsMax, int harvestPrice, int seedPrice, int mutability, int influence, int resistance, int capacity, bool refillable)
         {
-            Id = b.Id ?? throw new ArgumentNullException(nameof(b.Id));
-            GrowthTime = ValidateMin(b.GrowthTime, 1, nameof(b.GrowthTime));
-            LifeTime = ValidateMin(b.LifeTime, 1, nameof(b.LifeTime));
-            HarvestMin = ValidateMin(b.HarvestMin, 0, nameof(b.HarvestMin));
-            HarvestMax = ValidateMin(b.HarvestMax, 1, nameof(b.HarvestMax));
-            SeedsMin = ValidateMin(b.SeedsMin, 0, nameof(b.SeedsMin));
-            SeedsMax = ValidateMin(b.SeedsMax, 1, nameof(b.SeedsMax));
-            HarvestPrice = ValidateMin(b.HarvestPrice, 0, nameof(b.HarvestPrice));
-            SeedPrice = ValidateMin(b.SeedPrice, 0, nameof(b.SeedPrice));
-            Mutability = ValidateMin(b.Mutability, 1, nameof(b.Mutability));
-            Influence = ValidateMin(b.Influence, 1, nameof(b.Influence));
-            Resistance = ValidateMin(b.Resistance, 1, nameof(b.Resistance));
-            Capacity = ValidateMin(b.Capacity, 1, nameof(b.Capacity));
-            Refillable = b.Refillable;
+            Id = id ?? throw new ArgumentNullException(nameof(id));
+            GrowthTime = ValidateMin(growthTime, 1, nameof(growthTime));
+            LifeTime = ValidateMin(lifeTime, 1, nameof(lifeTime));
+            HarvestMin = ValidateMin(harvestMin, 0, nameof(harvestMin));
+            HarvestMax = ValidateMin(harvestMax, 1, nameof(harvestMax));
+            SeedsMin = ValidateMin(seedsMin, 0, nameof(seedsMin));
+            SeedsMax = ValidateMin(seedsMax, 1, nameof(seedsMax));
+            HarvestPrice = ValidateMin(harvestPrice, 0, nameof(harvestPrice));
+            SeedPrice = ValidateMin(seedPrice, 0, nameof(seedPrice));
+            Mutability = ValidateMin(mutability, 1, nameof(mutability));
+            Influence = ValidateMin(influence, 1, nameof(influence));
+            Resistance = ValidateMin(resistance, 1, nameof(resistance));
+            Capacity = ValidateMin(capacity, 1, nameof(capacity));
+            Refillable = refillable;
         }
+        #endregion
 
         public class Builder
         {

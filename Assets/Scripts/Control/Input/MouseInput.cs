@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityInput = UnityEngine.Input;
 
 namespace RootCapsule.Control.Input
 {
@@ -7,29 +8,36 @@ namespace RootCapsule.Control.Input
     {
         void Update()
         {
-            if (IsPrimaryAction())
+            Vector2 point = new Vector2();
+            if (IsPrimaryAction(ref point))
             {
-                RaisePrimaryPressed();
+                RaisePrimaryPressed(point);
                 return;
             }
-            if (IsSecondaryAction())
+            if (IsSecondaryAction(ref point))
             {
-                RaiseSecondaryPressed();
+                RaiseSecondaryPressed(point);
                 return;
             }
         }
 
-        bool IsPrimaryAction()
+        bool IsPrimaryAction(ref Vector2 point)
         {
-            if (UnityEngine.Input.GetMouseButtonDown(0))
+            if (UnityInput.GetMouseButtonDown(0))
+            {
+                point = UnityInput.mousePosition;
                 return true;
+            }
             return false;
         }
 
-        bool IsSecondaryAction()
+        bool IsSecondaryAction(ref Vector2 point)
         {
-            if (UnityEngine.Input.GetMouseButtonDown(1))
+            if (UnityInput.GetMouseButtonDown(1))
+            {
+                point = UnityInput.mousePosition;
                 return true;
+            }
             return false;
         }
     }

@@ -1,23 +1,26 @@
 ﻿using RootCapsule.Core;
+using RootCapsule.Core.Types;
+using RootCapsule.ModelData.Fields;
 using System;
 using UnityEngine;
 
 namespace RootCapsule.Model.Fields
 {
     // developing: row arable, weed attack, crossing
-    public class Arable : MonoBehaviour
+    [Serializable]
+    public class Arable : MonoBehaviour, ISerializableObject<ArableData>
     {
-        [SerializeField] private Plant plantPrefab;
-        [SerializeField] private DeadPlant deadPlantPrefab;
-
-        public Vector2Int IndexPosition { get; private set; }
-
         public Fertilizer Fertilizer { get; private set; }
         public IAlive AliveOnArable { get; private set; }
 
-        Field field;
+        public Vector2Int IndexPosition { get; private set; }
 
-        bool initialized = false;
+        private Plant plantBlank;
+        private DeadPlant deadPlantBlank;
+        private Field field;
+
+        private bool initialized = false;
+
 
         public void Initialize(int iPos, int jPos)
         {
@@ -30,12 +33,24 @@ namespace RootCapsule.Model.Fields
 
         public void PlantSeed(Seed seed)
         {
+            ActivatePlant(plantBlank);
+            plantBlank.Initialize(seed.PlantType, seed.SeedStat);
+        }
+
+        void ActivatePlant(IAlive alive)
+        {
             if (AliveOnArable != null) throw new InvalidOperationException($"{typeof(Arable)} can't store more that one plant!");
 
-            var newPlant = Instantiate(plantPrefab, transform);
-            newPlant.Initialize(this, seed.PlantType, seed.SeedStat, Fertilizer);
-            AliveOnArable = newPlant;
-            newPlant.Destruction += OnDestruction;
+            AliveOnArable = alive;
+            AliveOnArable.Destruction += OnDestruction;
+        }
+
+        void DeactivatePlant()
+        {
+            if (AliveOnArable == null) throw new InvalidOperationException($"{typeof(Arable)} can't deactivate nothing!");
+
+            AliveOnArable.Destruction -= OnDestruction;
+            AliveOnArable = null;
         }
 
         Field GetField()
@@ -48,6 +63,15 @@ namespace RootCapsule.Model.Fields
             }
 
             return field;
+        }
+
+        void Awake()
+        {
+            var plantPrefab = PrefabHelper.GetFieldPrefab<Plant>();
+            plantBlank = Instantiate(plantPrefab, transform);
+
+            var deadPlantPrefab = PrefabHelper.GetFieldPrefab<DeadPlant>();
+            deadPlantBlank = Instantiate(deadPlantPrefab, transform);
         }
 
         void Start()
@@ -81,18 +105,19 @@ namespace RootCapsule.Model.Fields
 
         void OnDestruction()
         {
+            AliveOnArable.Deinitialize();
             Plant plant = AliveOnArable as Plant;
-            if (plant != null)
+            if (AliveOnArable is Plant)
             {
-                var deadPlant = Instantiate(deadPlantPrefab, transform);
-                plant.PutToDeathParts(deadPlant);
-                plant.Destruction -= OnDestruction;
-                deadPlant.Destruction += OnDestruction;
-                AliveOnArable = deadPlant;
+                DeactivatePlant();
+
+                deadPlantBlank.Initialize(plant.PlantType, plant.GetPlantPartsPositions());
+
+                ActivatePlant(deadPlantBlank);
             }
-            else
+            else if (AliveOnArable is DeadPlant)
             {
-                AliveOnArable = null;
+                DeactivatePlant();
             }
         }
 
@@ -100,5 +125,55 @@ namespace RootCapsule.Model.Fields
         {
             // TODO
         }
+
+        #region Serialization
+        public ArableData SerializeState()
+        {
+            var data = new ArableData
+            {
+                PositionX = IndexPosition.x,
+                PositionY = IndexPosition.y
+            };
+
+            if (Fertilizer != null)
+                data.Fertilizer = Fertilizer.SerializeState();
+
+            if (AliveOnArable is Plant)
+                data.Plant = (AliveOnArable as Plant).SerializeState();
+
+            else if (AliveOnArable is DeadPlant)
+                data.DeadPlant = (AliveOnArable as DeadPlant).SerializeState();
+            
+            return data;
+        }
+
+        public void DeserializeState(ArableData data)
+        {
+            Initialize(data.PositionX, data.PositionY);
+            Fertilizer = null;
+            if (AliveOnArable != null)
+            {
+                AliveOnArable.Deinitialize();
+                DeactivatePlant();
+            }
+
+            if (data.Fertilizer != null)
+            {
+                Fertilizer = new Fertilizer(data.Fertilizer.Value);
+            }
+
+            if (data.Plant != null)
+            {
+                ActivatePlant(plantBlank);
+                plantBlank.DeserializeState(data.Plant.Value);
+            }
+
+            else if (data.DeadPlant != null)
+            {
+                ActivatePlant(deadPlantBlank);
+                deadPlantBlank.DeserializeState(data.DeadPlant.Value);
+            }
+        }
+        #endregion
     }
 }

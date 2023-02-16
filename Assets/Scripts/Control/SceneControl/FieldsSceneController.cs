@@ -1,4 +1,5 @@
 ﻿using RootCapsule.Core;
+using RootCapsule.Core.Types;
 using RootCapsule.Model.Fields;
 using System.ComponentModel;
 using UnityEngine;
@@ -11,9 +12,9 @@ namespace RootCapsule.Control.SceneControl
     {
         [SerializeField, EditorBrowsable(EditorBrowsableState.Always)] 
 
-        protected override void OnPrimaryPressed()
+        protected override void OnPrimaryPressed(Vector2 point)
         {
-            Arable arable = GetArableOnMouse();
+            Arable arable = GetArableOnPoint(point);
             if (arable != null && arable.AliveOnArable == null)
             {
                 //TEST CODE
@@ -33,14 +34,14 @@ namespace RootCapsule.Control.SceneControl
                     Resistance = 1,
                     Capacity = 1
                 }.Build();
-                var seed = new Seed(type, new SeedStat());
+                var seed = new Seed(type, new SeedStat.Builder().Build());
                 arable.PlantSeed(seed);
             }
         }
 
-        Arable GetArableOnMouse()
+        Arable GetArableOnPoint(Vector2 point)
         {
-            var ray = Camera.main.ScreenPointToRay(UnityInput.mousePosition);
+            var ray = Camera.main.ScreenPointToRay(point);
             var hits = Physics.RaycastAll(ray);
             foreach (RaycastHit hit in hits)
             {

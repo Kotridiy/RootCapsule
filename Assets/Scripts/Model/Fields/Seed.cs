@@ -1,5 +1,5 @@
 ﻿using RootCapsule.Core;
-using System;
+using RootCapsule.Core.Types;
 
 namespace RootCapsule.Model.Fields
 {

@@ -7,7 +7,14 @@ namespace RootCapsule.Control.Input
     {
         void Awake()
         {
-            gameObject.AddComponent<MouseInput>();
+            if (SystemInfo.deviceType == DeviceType.Desktop)
+            {
+                gameObject.AddComponent<MouseInput>();
+            }
+            if (SystemInfo.deviceType == DeviceType.Handheld)
+            {
+                gameObject.AddComponent<TouchpadInput>();
+            }
         }
     }
 }
