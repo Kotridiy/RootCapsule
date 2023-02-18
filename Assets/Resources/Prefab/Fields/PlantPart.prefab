@@ -106,4 +106,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86cc973599a6ce7429e80e3a4cb9220e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullVolume: 540

@@ -4,6 +4,7 @@ using System;
 
 namespace RootCapsule.Model.Fields
 {
+    //developing: save\load
     public class Fertilizer: ISerializableObject<FertilizerData>
     {
         public float GrowthModifier { get; }

@@ -1,13 +1,11 @@
 ﻿using RootCapsule.Core;
 using RootCapsule.Core.Types;
 using RootCapsule.ModelData.Fields;
-using System.Linq;
 using System.Text;
 using UnityEngine;
 
 namespace RootCapsule.Model.Fields
 {
-    // developing: containg model and state, change state to change model
     [RequireComponent(typeof(MeshFilter))]
     public class PlantPart : MonoBehaviour
     {

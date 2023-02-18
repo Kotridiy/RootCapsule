@@ -2,15 +2,12 @@
 using RootCapsule.Core.Types;
 using RootCapsule.ModelData.Fields;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityRandom = UnityEngine.Random;
 
 namespace RootCapsule.Model.Fields
 {
-    // Developing: grows, dies, destroing, get seeds, harvesting, magic effects, save/load
+    // Developing: destroing, get seeds, harvesting, magic effects
     public class Plant : MonoBehaviour, IAlive, ISerializableObject<PlantData>
     {
         public const int LIFE_STAGE_COUNT = 3;

@@ -2,12 +2,11 @@
 using RootCapsule.Core.Types;
 using RootCapsule.ModelData.Fields;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RootCapsule.Model.Fields
 {
-    // developing: store model of dead plant, destroy
+    // developing: destroy
     public class DeadPlant : MonoBehaviour, IAlive, ISerializableObject<DeadPlantData>
     {
         [SerializeField] Vector2Int matrixSize = new Vector2Int(3, 4);

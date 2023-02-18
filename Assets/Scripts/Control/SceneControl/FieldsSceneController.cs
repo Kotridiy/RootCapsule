@@ -3,6 +3,7 @@ using RootCapsule.Core.Types;
 using RootCapsule.Model.Fields;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityInput = UnityEngine.Input;
 
 namespace RootCapsule.Control.SceneControl
@@ -10,7 +11,13 @@ namespace RootCapsule.Control.SceneControl
     // developing: All player actions, control by player body
     class FieldsSceneController : SceneController
     {
-        [SerializeField, EditorBrowsable(EditorBrowsableState.Always)] 
+        private void Update()
+        {
+            if (UnityInput.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
 
         protected override void OnPrimaryPressed(Vector2 point)
         {
