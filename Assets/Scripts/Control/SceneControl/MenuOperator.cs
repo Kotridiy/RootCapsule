@@ -1,5 +1,4 @@
 ﻿using RootCapsule.Core;
-using RootCapsule.Music;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,8 +42,6 @@ namespace RootCapsule.Control.SceneControl
 
         IEnumerator ExitCoroutine()
         {
-            var music = FindObjectOfType<MusicActor>();
-            music.StopPlaying();
             ExitFader.FadeIn();
             yield return new WaitForSeconds(ExitFader.FadeInDuration);
 

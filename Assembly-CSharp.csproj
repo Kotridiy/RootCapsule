@@ -91,7 +91,6 @@
     <Compile Include="Assets\Scripts\ModelData\Fields\FieldData.cs" />
     <Compile Include="Assets\Scripts\ModelData\Fields\PlantData.cs" />
     <Compile Include="Assets\Scripts\ModelData\Fields\UnityData.cs" />
-    <Compile Include="Assets\Scripts\Sound\MusicActor.cs" />
     <Compile Include="Assets\Scripts\Test\Tester.cs" />
     <Compile Include="Assets\Scripts\UI\MenuButtonController.cs" />
   </ItemGroup>

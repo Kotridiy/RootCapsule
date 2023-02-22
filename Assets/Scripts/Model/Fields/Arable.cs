@@ -7,7 +7,7 @@ using UnityEngine;
 namespace RootCapsule.Model.Fields
 {
     // developing: row arable, weed attack, crossing
-    [Serializable, RequireComponent(typeof(AudioSource))]
+    [Serializable]
     public class Arable : MonoBehaviour, ISerializableObject<ArableData>
     {
         public Fertilizer Fertilizer { get; private set; }
@@ -15,13 +15,9 @@ namespace RootCapsule.Model.Fields
 
         public Vector2Int IndexPosition { get; private set; }
 
-        public AudioClip PlantSound;
-
         private Plant plantBlank;
         private DeadPlant deadPlantBlank;
         private Field field;
-
-        private AudioSource audioSource;
 
         private bool initialized = false;
 
@@ -37,9 +33,6 @@ namespace RootCapsule.Model.Fields
 
         public void PlantSeed(Seed seed)
         {
-            audioSource.clip = PlantSound;
-            audioSource.Play();
-
             ActivatePlant(plantBlank);
             plantBlank.Initialize(seed.PlantType, seed.SeedStat);
         }
@@ -79,8 +72,6 @@ namespace RootCapsule.Model.Fields
 
             var deadPlantPrefab = PrefabHelper.GetFieldPrefab<DeadPlant>();
             deadPlantBlank = Instantiate(deadPlantPrefab, transform);
-
-            audioSource = GetComponent<AudioSource>();
         }
 
         void Start()
