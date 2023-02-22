@@ -1,5 +1,126 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6224212048503896777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-CLICK
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-CLICK
+  Guid:
+    Data1: 524131303
+    Data2: 1273158908
+    Data3: 41550261
+    Data4: -1959875084
+  Banks:
+  - {fileID: -307954360685102695}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5908174071907522129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/RootCapsule/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638127035695856292
+  FileSizes:
+  - Name: Desktop
+    Value: 1072
+  Exists: 1
+--- !u!114 &-4869319978616084039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-NAVODKA NA KNOPKU
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-NAVODKA NA KNOPKU
+  Guid:
+    Data1: 755141021
+    Data2: 1221434351
+    Data3: 931625406
+    Data4: -1239429778
+  Banks:
+  - {fileID: -307954360685102695}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4532341808391241683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-START BUTTON
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-START BUTTON
+  Guid:
+    Data1: -631712126
+    Data2: 1277327786
+    Data3: -21805408
+    Data4: -245587846
+  Banks:
+  - {fileID: -307954360685102695}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-307954360685102695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/RootCapsule/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638127035695846303
+  FileSizes:
+  - Name: Desktop
+    Value: 1701536
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,10 +133,129 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
+  EditorBanks:
+  - {fileID: -5908174071907522129}
+  - {fileID: -307954360685102695}
+  EditorEvents:
+  - {fileID: 7787611685606037363}
+  - {fileID: 1109797159751780835}
+  - {fileID: 5300015700164328239}
+  - {fileID: -4532341808391241683}
+  - {fileID: -4869319978616084039}
+  - {fileID: -6224212048503896777}
+  - {fileID: 6308452632613902728}
   EditorParameters: []
-  MasterBanks: []
-  StringsBanks: []
-  cacheTime: 0
+  MasterBanks:
+  - {fileID: -307954360685102695}
+  StringsBanks:
+  - {fileID: -5908174071907522129}
+  cacheTime: 638127035695856292
   cacheVersion: 131601
+--- !u!114 &1109797159751780835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-EXIT BUTTON
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-EXIT BUTTON
+  Guid:
+    Data1: -696173269
+    Data2: 1153149849
+    Data3: -1547091039
+    Data4: -359038213
+  Banks:
+  - {fileID: -307954360685102695}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5300015700164328239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-SETTINGS CLICK
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-SETTINGS CLICK
+  Guid:
+    Data1: -1961166793
+    Data2: 1214800695
+    Data3: -622193525
+    Data4: 1538960346
+  Banks:
+  - {fileID: -307954360685102695}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6308452632613902728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-SETTINGS NAVODKA
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-SETTINGS NAVODKA
+  Guid:
+    Data1: -997216003
+    Data2: 1274132602
+    Data3: -601010291
+    Data4: -669333982
+  Banks:
+  - {fileID: -307954360685102695}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7787611685606037363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/Music/Test
+  m_EditorClassIdentifier: 
+  Path: event:/Main/Music/Test
+  Guid:
+    Data1: 419282945
+    Data2: 1324271948
+    Data3: -96765280
+    Data4: 1503828430
+  Banks:
+  - {fileID: -307954360685102695}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 106344

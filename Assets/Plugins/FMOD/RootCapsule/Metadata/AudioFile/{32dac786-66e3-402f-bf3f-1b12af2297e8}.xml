@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{32dac786-66e3-402f-bf3f-1b12af2297e8}">
+		<property name="assetPath">
+			<value>MENU-START BUTTON.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.5679999999999996</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ec2c9130-7e97-4bc2-9eda-9d7a53f31b86}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{2c5fe389-7658-4d04-b4ec-e84598df8d99}">
+		<property name="assetPath">
+			<value>Тайны бога грибов ЛОНГ DEMO V3.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>89.352000000000004</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ec2c9130-7e97-4bc2-9eda-9d7a53f31b86}</destination>
+		</relationship>
+	</object>
+</objects>

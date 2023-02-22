@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{8b4b443f-fab2-4a4c-bbef-99610ff7a0b2}">
+		<property name="assetPath">
+			<value>MENU-NAVODKA NA KNOPKU.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.23999999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ec2c9130-7e97-4bc2-9eda-9d7a53f31b86}</destination>
+		</relationship>
+	</object>
+</objects>

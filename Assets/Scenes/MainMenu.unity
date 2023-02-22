@@ -364,14 +364,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &167747190
-AudioListener:
+--- !u!114 &167747190
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167747189}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!20 &167747191
 Camera:
   m_ObjectHideFlags: 0
@@ -1745,3 +1750,39 @@ PrefabInstance:
     - {fileID: 8444217803980579711, guid: fdcbede481c4a2747ae11ce10c28af56, type: 3}
     - {fileID: 381297798549455393, guid: fdcbede481c4a2747ae11ce10c28af56, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fdcbede481c4a2747ae11ce10c28af56, type: 3}
+--- !u!1 &4076867617793011338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4076867618212535768, guid: fdcbede481c4a2747ae11ce10c28af56,
+    type: 3}
+  m_PrefabInstance: {fileID: 4076867617793011337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4076867617793011339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076867617793011338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 755141021
+      Data2: 1221434351
+      Data3: 931625406
+      Data4: -1239429778
+    Path: event:/Main/UI/MENU-NAVODKA NA KNOPKU
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
