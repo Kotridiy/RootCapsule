@@ -56,13 +56,20 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetsInUse\Effects\Blur\Scripts\FlipMode.cs" />
+    <Compile Include="Assets\AssetsInUse\Effects\Blur\Scripts\UIBlur.cs" />
+    <Compile Include="Assets\AssetsInUse\Effects\Blur\Scripts\UIBlurWithCanvasGroup.cs" />
+    <Compile Include="Assets\Downloaded\Huge Mocap Library\demo\scripts\demo.cs" />
+    <Compile Include="Assets\Downloaded\Huge Mocap Library\demo\scripts\smoothFollow.cs" />
     <Compile Include="Assets\Scripts\Control\Input\InputResolver.cs" />
     <Compile Include="Assets\Scripts\Control\Input\MouseInput.cs" />
     <Compile Include="Assets\Scripts\Control\Input\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Control\Input\TouchpadInput.cs" />
     <Compile Include="Assets\Scripts\Control\SceneControl\FieldsSceneController.cs" />
-    <Compile Include="Assets\Scripts\Control\SceneControl\MenuOperator.cs" />
+    <Compile Include="Assets\Scripts\Control\SceneControl\MainMenuOperator.cs" />
+    <Compile Include="Assets\Scripts\Control\SceneControl\Puppet.cs" />
     <Compile Include="Assets\Scripts\Control\SceneControl\SceneController.cs" />
+    <Compile Include="Assets\Scripts\Control\SceneControl\SettingsMenuOperator.cs" />
     <Compile Include="Assets\Scripts\Core\Fader.cs" />
     <Compile Include="Assets\Scripts\Core\ModelHelper.cs" />
     <Compile Include="Assets\Scripts\Core\PrefabHelper.cs" />
@@ -92,7 +99,13 @@
     <Compile Include="Assets\Scripts\ModelData\Fields\PlantData.cs" />
     <Compile Include="Assets\Scripts\ModelData\Fields\UnityData.cs" />
     <Compile Include="Assets\Scripts\Test\Tester.cs" />
-    <Compile Include="Assets\Scripts\UI\MenuButtonController.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuButton.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Downloaded\Huge Mocap Library\mocap animations\cmu-mocap-index-text.txt" />
+    <None Include="Assets\Downloaded\Huge Mocap Library\READTHIS.txt" />
+    <None Include="Assets\AssetsInUse\Effects\Blur\Readme.txt" />
+    <None Include="Assets\AssetsInUse\Effects\Blur\Shaders\UI Blur.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

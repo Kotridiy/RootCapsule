@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7948035268925020882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-EXIT BUTTON
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-EXIT BUTTON
+  Guid:
+    Data1: -696173269
+    Data2: 1153149849
+    Data3: -1547091039
+    Data4: -359038213
+  Banks:
+  - {fileID: -5605537975767667342}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6224212048503896777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,6 +73,53 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 1072
+  Exists: 1
+--- !u!114 &-5664634967719127076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-CLICK
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-CLICK
+  Guid:
+    Data1: 524131303
+    Data2: 1273158908
+    Data3: 41550261
+    Data4: -1959875084
+  Banks:
+  - {fileID: -5605537975767667342}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5605537975767667342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/RootCapsule/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638129456063705534
+  FileSizes:
+  - Name: Desktop
+    Value: 1702080
   Exists: 1
 --- !u!114 &-4869319978616084039
 MonoBehaviour:
@@ -101,6 +175,87 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3907623131618307055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-SETTINGS CLICK
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-SETTINGS CLICK
+  Guid:
+    Data1: -1961166793
+    Data2: 1214800695
+    Data3: -622193525
+    Data4: 1538960346
+  Banks:
+  - {fileID: -5605537975767667342}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2920335545833189065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-NAVODKA NA KNOPKU
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-NAVODKA NA KNOPKU
+  Guid:
+    Data1: 755141021
+    Data2: 1221434351
+    Data3: 931625406
+    Data4: -1239429778
+  Banks:
+  - {fileID: -5605537975767667342}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1233876503896177741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-SETTINGS NAVODKA
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-SETTINGS NAVODKA
+  Guid:
+    Data1: -997216003
+    Data2: 1274132602
+    Data3: -601010291
+    Data4: -669333982
+  Banks:
+  - {fileID: -5605537975767667342}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-307954360685102695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,23 +289,50 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -5908174071907522129}
-  - {fileID: -307954360685102695}
+  - {fileID: 4495063481547505141}
+  - {fileID: -5605537975767667342}
   EditorEvents:
-  - {fileID: 7787611685606037363}
-  - {fileID: 1109797159751780835}
-  - {fileID: 5300015700164328239}
-  - {fileID: -4532341808391241683}
-  - {fileID: -4869319978616084039}
-  - {fileID: -6224212048503896777}
-  - {fileID: 6308452632613902728}
+  - {fileID: 155558758577856807}
+  - {fileID: -7948035268925020882}
+  - {fileID: -3907623131618307055}
+  - {fileID: 8488406108219900218}
+  - {fileID: -2920335545833189065}
+  - {fileID: -5664634967719127076}
+  - {fileID: -1233876503896177741}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -307954360685102695}
+  - {fileID: -5605537975767667342}
   StringsBanks:
-  - {fileID: -5908174071907522129}
-  cacheTime: 638127488060002642
+  - {fileID: 4495063481547505141}
+  cacheTime: 638129456063715539
   cacheVersion: 131601
+--- !u!114 &155558758577856807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/Music/Test
+  m_EditorClassIdentifier: 
+  Path: event:/Main/Music/Test
+  Guid:
+    Data1: 419282945
+    Data2: 1324271948
+    Data3: -96765280
+    Data4: 1503828430
+  Banks:
+  - {fileID: -5605537975767667342}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 106344
 --- !u!114 &1109797159751780835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +360,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4495063481547505141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/RootCapsule/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638129456063715539
+  FileSizes:
+  - Name: Desktop
+    Value: 1072
+  Exists: 1
 --- !u!114 &5300015700164328239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +461,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 106344
+--- !u!114 &8488406108219900218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Main/UI/MENU-START BUTTON
+  m_EditorClassIdentifier: 
+  Path: event:/Main/UI/MENU-START BUTTON
+  Guid:
+    Data1: -631712126
+    Data2: 1277327786
+    Data3: -21805408
+    Data4: -245587846
+  Banks:
+  - {fileID: -5605537975767667342}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

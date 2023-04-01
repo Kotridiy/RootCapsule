@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RootCapsule.Core
 {
@@ -29,9 +30,29 @@ namespace RootCapsule.Core
             animator.speed = 1 / FadeOutDuration;
         }
 
+        public void FadingChangeScene(string sceneName)
+        {
+            StartCoroutine(FadingChangeSceneCoroutine(sceneName));
+        }
+
         void Awake()
         {
             animator = GetComponent<Animator>();    
+        }
+
+        IEnumerator FadingChangeSceneCoroutine(string sceneName)
+        {
+            Transform saved = transform.parent ?? transform;
+            DontDestroyOnLoad(saved.gameObject);
+            FadeIn();
+            yield return new WaitForSeconds(FadeInDuration);
+
+            SceneManager.LoadScene(sceneName);
+            yield return new WaitForSeconds(PauseDuration);
+
+            FadeOut();
+            yield return new WaitForSeconds(FadeOutDuration);
+            Destroy(saved.gameObject);
         }
     }
 }

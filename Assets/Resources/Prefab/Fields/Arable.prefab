@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3317936356394546308}
   - component: {fileID: 339421430641373472}
   - component: {fileID: 2446413451199884488}
+  - component: {fileID: 440152151399086372}
   m_Layer: 0
   m_Name: Arable
   m_TagString: Untagged
@@ -58,6 +59,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7a8fa798023504090bd939ca13a746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &440152151399086372
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153062730297651472}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5, y: 0.15, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &855705421025724232
 GameObject:
   m_ObjectHideFlags: 0
